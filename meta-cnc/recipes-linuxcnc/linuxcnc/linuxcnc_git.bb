@@ -17,15 +17,15 @@ S = "${WORKDIR}/git"
 
 #LDFLAGS += "-lpthread"
 
-DEPENDS = "pth glib-2.0 tcl gtk+ bwidget"
+DEPENDS = "pth glib-2.0 tcl tk gtk+ bwidget"
 #DEPENDS += "libusb1 "
 #DEPENDS += "libmodbus"
 # libboost-python-dev
 
 #EXTRA_OEMAKE += " "
 EXTRA_OECONF = " --enable-simulator --without-libmodbus --without-libusb-1.0"
-EXTRA_OECONF += "--with-tclConfig=${STAGING_DIR}/${MACHINE}/${libdir}/tclConfig.sh"
-EXTRA_OECONF += "--with-tkConfig=${STAGING_DIR}/${MACHINE}/${libdir}/tclConfig.sh"
+EXTRA_OECONF += "--with-tclConfig=${STAGING_LIBDIR}/tclConfig.sh"
+EXTRA_OECONF += "--with-tkConfig=${STAGING_LIBDIR}/tkConfig.sh"
 #EXTRA_OECONF = " --enable-run-in-place"
 do_configure_prepend() {
     cd ${S}/src
