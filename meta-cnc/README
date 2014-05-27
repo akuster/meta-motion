@@ -1,8 +1,5 @@
 This README file contains information on the contents of the
-montion layer.
-
-Please see the corresponding sections below for details.
-
+cnc layer.
 
 Dependencies
 ============
@@ -17,17 +14,8 @@ This layer depends on:
   branch: master
 
   URI: https://github.com/akuster/meta-motion.git
+  layers: meta-cnc
   branch: master
-
-Layer
-=======
-
-Montion layer
-============
-
-The layer are use to build control software for various
-motion control platforms. Layers contained are listed below:
-  - meta-cnc 
 
 Patches
 =======
@@ -39,13 +27,9 @@ Table of Contents
 =================
 
   I. Adding the montion layer to your build
- II. Misc
-
 
 I. Adding the montion layer to your build
 =================================================
-
---- replace with specific instructions for the montion layer ---
 
 In order to use this layer, you need to make the build system aware of
 it.
@@ -59,7 +43,7 @@ other layers needed. e.g.:
     /path/to/yocto/meta \
     /path/to/yocto/meta-yocto \
     /path/to/yocto/meta-yocto-bsp \
-    /path/to/yocto/meta-montion \
+    /path/to/yocto/meta-cnc\
     "
 
 
