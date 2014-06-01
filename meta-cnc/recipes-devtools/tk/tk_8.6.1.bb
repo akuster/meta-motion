@@ -6,12 +6,14 @@ SECTION = "devel/tcltk"
 LICENSE = "tcl & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://license.terms;md5=c88f99decec11afa967ad33d314f87fe"
 
-DEPENDS = "tcl-native zlib"
-BASE_SRC_URI="http://prdownloads.sourceforge.net/tcl/${BPN}${PV}-src.tar.gz"
+#DEPENDS = "tcl libx11 zlib "
+DEPENDS = "tcl libx11 "
+
+SRC_URI="http://prdownloads.sourceforge.net/tcl/${BPN}${PV}-src.tar.gz"
+
 SRC_URI[md5sum] = "63f21c3a0e0cefbd854b4eb29b129ac6"
 SRC_URI[sha256sum] = "b691a2e84907392918665fe03a0deb913663a026bed2162185b4a9a14898162c"
 
-SRC_URI_class-native = "${BASE_SRC_URI}"
 
 S = "${WORKDIR}/${BPN}${PV}/unix"
 
@@ -19,9 +21,9 @@ VER = "${PV}"
 
 inherit autotools ptest binconfig
 
-DEPENDS_class-native = "zlib-native"
+#DEPENDS_class-native = "zlib-native"
 
-EXTRA_OECONF = "--with-tcl=${STAGING_LIBDIR} --enable-threads --disable-rpath --libdir=${libdir}"
+EXTRA_OECONF = "--with-tcl=${STAGING_DIR_NATIVE}${libdir} --enable-threads --disable-rpath --libdir=${libdir}"
 
 do_configure() {
 	cd ${S}
@@ -37,7 +39,7 @@ do_compile_prepend() {
 do_install() {
 	autotools_do_install install-private-headers
 	ln -sf ./tksh${VER} ${D}${bindir}/tksh
-	ln -sf tclsh8.6 ${D}${bindir}/tclsh${VER}
+	ln -sf tksh8.6 ${D}${bindir}/tksh${VER}
 	sed -i "s+-L${B}+-L${STAGING_LIBDIR}+g" tkConfig.sh
 	sed -i "s+${WORKDIR}+${STAGING_INCDIR}+g" tkConfig.sh
 	sed -i "s,-L${libdir},-L=${libdir},g" tkConfig.sh
@@ -58,7 +60,7 @@ tk_sysroot_preprocess () {
 }
 
 PACKAGES =+ "tk-lib"
-FILES_tcl-lib = "${libdir}/libtk8.6.so.*"
+FILES_tk-lib = "${libdir}/libtk8.6.so.*"
 FILES_${PN} += "${libdir}/tk${VER} ${libdir}/tk8.6 ${libdir}/tk8"
 FILES_${PN}-dev += "${libdir}/tkConfig.sh "
 
